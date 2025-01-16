@@ -1,0 +1,29 @@
+class Solution {
+   public:
+    vector<int> preorder(TreeNode* root) {
+        vector<int> order;
+        TreeNode* curr = root;
+
+        while (curr != NULL) {
+            if (curr->left == NULL) {
+                order.push_back(curr->data);
+                curr = curr->right;
+            } else {
+                TreeNode* prev = curr->left;
+                while (prev->right != NULL && prev->right != curr) {
+                    prev = prev->right;
+                }
+
+                if (prev->right == NULL) {
+                    order.push_back(curr->data);
+                    prev->right = curr;
+                    curr = curr->left;
+                } else {
+                    prev->right = NULL;
+                    curr = curr->right;
+                }
+            }
+        }
+        return order;
+    }
+};
