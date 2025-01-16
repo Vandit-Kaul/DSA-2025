@@ -1,6 +1,16 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int data;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *      TreeNode(int val) : data(val) , left(nullptr) , right(nullptr) {}
+ * };
+ **/
+
 class Solution {
    public:
-    vector<int> preorder(TreeNode* root) {
+    vector<int> getInorder(TreeNode* root) {
         vector<int> order;
         TreeNode* curr = root;
 
@@ -15,10 +25,10 @@ class Solution {
                 }
 
                 if (prev->right == NULL) {
-                    order.push_back(curr->data);
                     prev->right = curr;
                     curr = curr->left;
                 } else {
+                    order.push_back(curr->data);
                     prev->right = NULL;
                     curr = curr->right;
                 }
