@@ -1,0 +1,24 @@
+class Solution {
+   public:
+    vector<int> floorCeilOfBST(TreeNode* root, int key) {
+        vector<int> ans(2, -1); // Initialize ans with -1 for both floor and ceil
+        int ceil = -1, floor = -1;
+
+        while (root) {
+            if (root->data == key) {
+                floor = ceil = root->data;
+                break;
+            } else if (root->data > key) {
+                ceil = root->data; // Update ceil when key is smaller
+                root = root->left;
+            } else {
+                floor = root->data; // Update floor when key is larger
+                root = root->right;
+            }
+        }
+
+        ans[0] = floor;
+        ans[1] = ceil;
+        return ans;
+    }
+};
