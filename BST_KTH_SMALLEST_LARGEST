@@ -1,0 +1,40 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int data;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *      TreeNode(int val) : data(val) , left(nullptr) , right(nullptr) {}
+ * };
+ **/
+
+class Solution {
+   public:
+    void inorder(TreeNode* root, vector<int>& ans) {
+        if (root == NULL) {
+            return;
+        }
+
+        inorder(root->left, ans);
+        ans.push_back(root->data);
+        inorder(root->right, ans);
+    }
+
+    void reverse_inorder(TreeNode* root, vector<int>& ans) {
+        if (root == NULL) {
+            return;
+        }
+
+        reverse_inorder(root->right, ans);
+        ans.push_back(root->data);
+        reverse_inorder(root->left, ans);
+    }
+    vector<int> kLargesSmall(TreeNode* root, int k) {
+        vector<int> smallest;
+        vector<int> largest;
+        inorder(root, smallest);
+        reverse_inorder(root, largest);
+
+        return {smallest[k - 1], largest[k - 1]};
+    }
+};
