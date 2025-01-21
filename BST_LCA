@@ -1,0 +1,28 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int data;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *      TreeNode(int val) : data(val) , left(nullptr) , right(nullptr) {}
+ * };
+ **/
+
+class Solution {
+   public:
+    TreeNode* lca(TreeNode* root, int p, int q) {
+        if (root == NULL) {
+            return root;
+        }
+
+        if (p > root->data && q > root->data) {
+            return lca(root->right, p, q);
+        }
+
+        if (p < root->data && q < root->data) {
+            return lca(root->left, p, q);
+        }
+
+        return root;
+    }
+};
