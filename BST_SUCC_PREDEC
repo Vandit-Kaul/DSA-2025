@@ -1,0 +1,50 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int data;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *      TreeNode(int val) : data(val) , left(nullptr) , right(nullptr) {}
+ * };
+ **/
+
+class Solution {
+   public:
+    vector<int> succPredBST(TreeNode* root, int key) {
+        vector<int> ans;
+        TreeNode* succ = NULL;
+        TreeNode* predec = NULL;
+        TreeNode* originalroot = root;
+
+        while (root != NULL) {
+            if (key <= root->data) {
+                root = root->left;
+            } else {
+                predec = root;
+                root = root->right;
+            }
+        }
+        if (predec == NULL) {
+            ans.push_back(-1);
+        } else {
+            ans.push_back(predec->data);
+        }
+
+        root = originalroot;
+
+        while (root != NULL) {
+            if (key >= root->data) {
+                root = root->right;
+            } else {
+                succ = root;
+                root = root->left;
+            }
+        }
+        if (succ == NULL) {
+            ans.push_back(-1);
+        } else {
+            ans.push_back(succ->data);
+        }
+        return ans;
+    }
+};
