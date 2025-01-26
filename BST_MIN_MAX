@@ -1,0 +1,18 @@
+class Solution {
+  public:
+    int minValue(Node* root) {
+        Node* curr=root;
+        while(curr->left!=NULL) //For minimum value
+        {
+            curr=curr->left;
+        }
+        return curr->data;
+        
+        curr=root;
+        while(curr->right!=NULL) //for maximum value
+        {
+            curr=curr->right;
+        }
+        return curr->data;
+    }
+};
