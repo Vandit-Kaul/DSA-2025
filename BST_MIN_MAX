@@ -7,7 +7,7 @@ class Solution {
             curr=curr->left;
         }
         return curr->data;
-        
+
         curr=root;
         while(curr->right!=NULL) //for maximum value
         {
