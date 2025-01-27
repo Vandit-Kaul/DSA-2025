@@ -1,0 +1,57 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int data;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *      TreeNode(int val) : data(val) , left(nullptr) , right(nullptr) {}
+ * };
+ **/
+
+class Solution {
+   public:
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if (root == NULL) {
+            return root;
+        }
+
+        if (key < root->data) {
+            root->left = deleteNode(root->left, key);
+        } else if (key > root->data) {
+            root->right = deleteNode(root->right, key);
+        } else {
+           
+
+            // Case 1: No children
+            if (root->left == NULL && root->right == NULL) {
+                delete root;
+                return NULL;
+            }
+
+            // Case 2: One child
+            if (root->left == NULL) {
+                TreeNode* temp = root->right;
+                delete root;
+                return temp;
+            } else if (root->right == NULL) {
+                TreeNode* temp = root->left;
+                delete root;
+                return temp;
+            }
+
+            // Case 3: Two children
+            TreeNode* temp = findMin(root->right);  // Find in-order successor
+            root->data = temp->data;               // Replace data with successor's data
+            root->right = deleteNode(root->right, temp->data);  // Delete successor
+        }
+        return root;
+    }
+
+   private:
+    TreeNode* findMin(TreeNode* node) {
+        while (node->left != NULL) {
+            node = node->left;
+        }
+        return node;
+    }
+};
