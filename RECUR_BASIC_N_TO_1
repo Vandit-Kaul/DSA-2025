@@ -1,0 +1,23 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+using namespace std;
+
+void fun(int N,int num)
+{
+    // static int count=0;
+    if(num>N)
+    {
+        return;
+    }
+    
+    cout<<N<<endl;
+    N--;
+    fun(N,num);
+}
+int main() {
+    int N=5;
+    int num=1;
+    fun(N,num);
+
+    return 0;
+}
