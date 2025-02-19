@@ -1,0 +1,31 @@
+#include <iostream>
+#include <cstring>
+#include <vector>
+using namespace std;
+
+void ispalindrome(int i,int j,vector<char>&arr)
+{
+  
+  if(arr[i]!=arr[j] ) 
+  {
+    cout<<"Not a palindrome"<<endl;
+    return;
+  }
+  
+  if(i>=j)
+  {
+    cout<<"Is a palindrome"<<endl;
+    return;
+  }
+  
+  ispalindrome(i+1,j-1,arr);
+
+}
+int main()
+{
+    
+    vector<char> arr={'m','a','a','m'};
+    int i=0;
+    int j=arr.size()-1;
+    ispalindrome(i,j,arr);
+}
