@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+
+void solve(string str, vector<string>& result, string output, int index) {
+    if (index >= str.length()) {
+        if (!output.empty()) {
+            result.push_back(output);
+        }
+        return;
+    }
+
+    // Exclude
+    solve(str, result, output, index + 1);
+
+    // Include
+
+    solve(str, result, output + str[index], index + 1);
+}
+vector<string> subsequences(string str) {
+
+    vector<string> result;
+    string output = "";
+    int index = 0;
+
+    solve(str, result, output, index);
+    return result;
+}
