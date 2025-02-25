@@ -1,0 +1,30 @@
+vector<int> can(candies, candies + N); // Convert array to vector
+        vector<int> ans;
+        
+        // Sorting for Minimum Cost
+        sort(can.begin(), can.end());
+        int minCost = 0, maxCost = 0;
+        int buy = 0, free = N - 1;
+
+        // Calculate Minimum Cost
+        while (buy <= free) {
+            minCost += can[buy];  // Buy the cheapest
+            buy++;  
+            free -= K;  // Get K most expensive for free
+        }
+
+        // Sorting for Maximum Cost
+        sort(can.rbegin(), can.rend());
+        buy = 0, free = N - 1;
+
+        // Calculate Maximum Cost
+        while (buy <= free) {
+            maxCost += can[buy];  // Buy the most expensive
+            buy++;  
+            free -= K;  // Get K cheapest for free
+        }
+
+        ans.push_back(minCost);
+        ans.push_back(maxCost);
+        return ans;
+    }
