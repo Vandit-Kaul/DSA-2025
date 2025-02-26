@@ -1,0 +1,26 @@
+class Solution {
+  public:
+    int minimumDays(int S, int N, int M) {
+       int sundays=S/7;
+       int buying_days=S-sundays;
+       int count=0;
+       int total_food=S*M;
+       
+       if(total_food%N == 0)
+       {
+           count=total_food/N;
+       }
+       else{
+           count=(total_food/N) + 1 ;
+       }
+        
+       if(count<=buying_days)
+       {
+           return count;
+       }
+       else{
+           return -1;
+       }
+
+    }
+};
