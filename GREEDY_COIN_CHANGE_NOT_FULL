@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        sort(coins.rbegin(), coins.rend());
+        int count = 0;
+        int i = 0;
+
+        while (i < coins.size()) {
+            if (amount < coins[i]) {
+                i++;
+            } else {
+                amount -= coins[i];
+                count++;
+            }
+        }
+        if (amount != 0) {
+            return -1;
+        } else {
+            return count;
+        }
+    }
+};
