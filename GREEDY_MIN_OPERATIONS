@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main()
+{
+    int N;
+    cout<<"Enter the value of N:";
+    cin>>N;
+    
+    int i=0;
+    int count=0;
+    
+    while(N>0)
+    {
+        if(N%2==0)
+        {
+            N/=2;
+        }
+        else{
+            N--;
+        }
+        count++;
+    }
+    
+    cout<<"The count to get the correct value of N is:"<<count<<endl;
+}
