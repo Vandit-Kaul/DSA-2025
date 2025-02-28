@@ -1,0 +1,17 @@
+class Solution {
+  public:
+    long long solve(vector<int>& bt) {
+long long int wait=0;
+long long int total=0;
+        
+        
+        
+        for(int i=1;i<bt.size();i++)
+        {
+            wait+=bt[i-1];
+            total+=wait;
+        }
+        
+        
+        return (total/bt.size());
+    }
