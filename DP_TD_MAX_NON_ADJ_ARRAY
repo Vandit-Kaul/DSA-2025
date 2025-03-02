@@ -1,0 +1,30 @@
+#include <bits/stdc++.h> 
+
+int solve(int i,vector<int> &nums,vector<int> &dp)
+{
+ 
+ if(i>=nums.size())
+ {
+     return 0;
+ }
+
+
+if(dp[i]!=-1)
+{
+    return dp[i];
+}
+//Not-Take
+ int nottake= solve(i+1,nums,dp);
+
+//Take
+int take=nums[i] + solve(i+2,nums,dp);
+dp[i]=max(nottake,take);
+return dp[i];
+ 
+}
+int maximumNonAdjacentSum(vector<int> &nums){
+
+vector<int>dp(nums.size()+1,-1);
+return solve(0,nums,dp);
+
+}
