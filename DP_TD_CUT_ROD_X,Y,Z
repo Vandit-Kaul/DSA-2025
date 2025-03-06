@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 int solve(int n, int x, int y, int z,vector<int> &dp)
 {
