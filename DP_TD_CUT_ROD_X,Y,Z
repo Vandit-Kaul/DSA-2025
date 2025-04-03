@@ -29,7 +29,7 @@ int solve(int n, int x, int y, int z,vector<int> &dp)
 	 else{
 		 return -1;
 	 }
-	 
+
 	return dp[n];
 }
 int cutSegments(int n, int x, int y, int z) {
