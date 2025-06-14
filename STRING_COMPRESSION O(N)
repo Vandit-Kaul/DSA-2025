@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        int length = chars.size();
+        int i = 0;
+        int max_index = 0;
+        while (i < length) {
+            // take the next character
+            int j = i + 1;
+            // check whether the next character is equal to the first character
+            // or not
+            while (j < length && chars[i] == chars[j]) {
+                j++;
+            }
+            // old character store
+
+            chars[max_index++] = chars[i];
+
+            int count = j - i;
+
+            if (count > 1) {
+                string cnt = to_string(count);
+                for (char ch : cnt) {
+                    chars[max_index++] = ch;
+                }
+            }
+            i = j;
+        }
+        return max_index;
+    }
+};
