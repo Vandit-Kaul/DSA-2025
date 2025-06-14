@@ -1,0 +1,29 @@
+int maximumFrequency(vector<int> &arr, int n)
+{
+  
+
+  unordered_map<int,int> m;
+  int size=arr.size();
+  //insert into the map
+  int maxfreq=0;
+  int maxindex=0;
+  for(int i=0;i<size;i++)
+  {
+      m[arr[i]]++;
+      maxfreq=max(maxfreq,m[arr[i]]);
+  }
+
+  //now get the first element if more than one are competing with each other.
+
+  for(int i=0;i<size;i++)
+  {
+      if(maxfreq==m[arr[i]])
+      {
+          maxindex=arr[i];
+          break;
+      }
+  }
+  
+  return maxindex;
+
+}
