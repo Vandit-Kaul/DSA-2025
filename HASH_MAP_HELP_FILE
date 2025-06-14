@@ -1,0 +1,53 @@
+#include <iostream>
+#include <map>
+#include <unordered_map>
+using namespace std;
+
+int main()
+{
+
+   map<string, int> m;
+
+    // insertion
+    // 1
+    pair<string, int> p = make_pair("vandit", 1);
+    m.insert(p);
+
+    // 2
+    pair<string, int> pair2("kaul", 2);
+    m.insert(pair2);
+
+    // 3
+    m["hello"] = 3;
+
+    // search
+    cout << m.at("vandit") << endl;
+
+    // size
+    cout << "size: " << m.size() << endl;
+
+    // to check presence
+
+    cout << m.count("bye") << endl;
+
+    // delete a key-value pair
+
+    m.erase("kaul");
+
+    cout << "size: " << m.size() << endl;
+
+
+// creating an iterator
+
+map<string,int> :: iterator it = m.begin();
+
+while (it != m.end())
+{
+    cout << it->first << " " << it->second << endl;
+    it++;
+}
+
+//unordered map does not print in correct order.(random order 0(1) time))
+//but map does (logn time)
+
+}
