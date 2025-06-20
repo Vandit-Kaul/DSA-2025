@@ -1,0 +1,22 @@
+#include <bits/stdc++.h> 
+void pushing(stack<int> & myStack,int count,int size,int number)
+{
+   if(count == size - 1)
+   {
+     int top=myStack.top();
+     myStack.pop();
+     myStack.push(number);
+     myStack.push(top);
+     return;
+   }
+
+   int num=myStack.top();
+   myStack.pop();
+   pushing(myStack,count+1,size,number);
+   myStack.push(num);
+}
+stack<int> pushAtBottom(stack<int>& myStack, int x) 
+{
+    pushing(myStack,0,myStack.size(),x);
+    return myStack;
+}
