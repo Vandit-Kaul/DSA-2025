@@ -1,0 +1,28 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main()
+{
+    string str = "vandit";
+
+    stack<char> s;
+
+    string ans = "";
+
+    int i = 0;
+    while (i < str.length())
+    {
+
+        s.push(str[i]);
+        i++;
+    }
+
+    while (!s.empty())
+    {
+        ans.push_back(s.top());
+        s.pop();
+    }
+
+    cout << ans << endl;
+}
