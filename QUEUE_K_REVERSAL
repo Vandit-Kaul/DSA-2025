@@ -1,0 +1,28 @@
+class Solution {
+  public:
+    void reverseK(queue<int> &q, int count,int k) {
+        if (count == k) return;
+
+        int front = q.front();
+        q.pop();
+
+        reverseK(q,count+1, k);
+        q.push(front);
+    }
+
+    queue<int> reverseFirstK(queue<int> q, int k) {
+        if (q.empty() ||  k > q.size()) return q;
+
+        // Step 1: Reverse first k elements using recursion
+        reverseK(q,0, k);
+
+        // Step 2: Move remaining n - k elements to back to maintain order
+        int n = q.size();
+        for (int i = 0; i < n - k; i++) {
+            q.push(q.front());
+            q.pop();
+        }
+
+        return q;
+    }
+};
