@@ -1,0 +1,71 @@
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class sta{
+public:
+int top;
+int * arr;
+int size;
+sta(int s)
+{
+    this->size=s;
+    top=-1;
+    arr=new int[size];
+}
+
+void push(int x)
+{
+    if(top==size-1)
+    {
+        return;
+    }
+    top++;
+    arr[top]=x;
+}
+
+
+bool isEmpty()
+{
+    if(top==-1)
+    {
+        return true;
+    }
+    return false;
+}
+
+
+int pop()
+{
+    //empty
+    if(top==-1)
+    {
+        return -1;
+    }
+    int ans=arr[top];
+    top--;
+    return ans;
+}
+
+int peak()
+{
+    if(top==-1)
+    {
+        return -1;
+    }
+    return arr[top];
+}
+};
+
+
+
+int main()
+{
+ sta st(5);
+    st.push(10);
+    st.push(20);
+    cout << "Top: " << st.peak() << endl;  
+    st.pop();
+    cout << "Top after pop: " << st.peak() << endl;
+}
