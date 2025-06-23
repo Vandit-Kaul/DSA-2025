@@ -1,0 +1,41 @@
+class Solution {
+  public:
+    queue<int> rearrangeQueue(queue<int> q) {
+        
+        
+        if(q.size() <= 1 )
+        {
+            return q;
+        }
+        
+        queue<int> q1;
+        queue<int> q2;
+        int n=q.size();
+        for(int i=0;i<n/2;i++) //inserting in first q1
+        {
+            int front=q.front();
+            q1.push(front);
+            q.pop();
+        }
+        
+        for(int i=0;i<n - n/2;i++) //inserting int secpnd q2
+        {
+            int front=q.front();
+            q2.push(front);
+            q.pop();
+        }
+        
+        while(!(q1.empty()) && !(q2.empty()))
+        {
+            int front1=q1.front();
+            q.push(front1);
+            q1.pop();
+            int front2=q2.front();
+            q.push(front2);
+            q2.pop();
+            
+            
+        }
+        return q;
+    }
+};
