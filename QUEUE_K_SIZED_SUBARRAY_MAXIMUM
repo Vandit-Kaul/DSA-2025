@@ -1,0 +1,48 @@
+#include <vector>
+class Solution {
+  public:
+    vector<int> maxOfSubarrays(vector<int>& arr, int k) {
+        
+        
+        vector<int> ans;
+        
+        deque<int>maxi;
+        
+        int n=arr.size();
+        
+        for(int i=0;i<k;i++)
+        {
+            while(!maxi.empty() && arr[maxi.back()] <= arr[i])
+            {
+                maxi.pop_back();
+            }
+            
+            maxi.push_back(i);
+        }
+        
+        ans.push_back(arr[maxi.front()]);
+        
+        for(int i=k;i<n;i++)
+        {
+            //removal
+            
+            while(!maxi.empty() && i-maxi.front() == k)
+            {
+                maxi.pop_front();
+            }
+            
+            
+            //addition
+            
+            while(!maxi.empty() && arr[maxi.back()] <= arr[i])
+            {
+                maxi.pop_back();
+            }
+            
+             maxi.push_back(i);
+             ans.push_back(arr[maxi.front()]);
+        }
+        
+        return ans;
+    }
+};
