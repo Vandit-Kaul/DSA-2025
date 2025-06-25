@@ -1,0 +1,117 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+    Node *next;
+    int data;
+
+    Node(int d)
+    {
+        this->data = d;
+        next = NULL;
+    }
+};
+
+void insertdata(Node *&tail, int pos, int value)
+{
+    if (tail == NULL) // Empty LL
+    {
+        Node *newNode = new Node(value);
+        newNode->next = newNode;
+        tail = newNode;
+        return;
+    }
+
+    Node *curr = tail->next; // Start from head
+    for (int i = 1; i < pos - 1 && curr != tail; i++)
+    {
+        curr = curr->next;
+    }
+
+    Node *newNode = new Node(value);
+    newNode->next = curr->next;
+    curr->next = newNode;
+
+    if (curr == tail)
+    { // Inserting after tail
+        tail = newNode;
+    }
+}
+
+void printList(Node *tail)
+{
+    if (tail == NULL)
+    {
+        cout << "List is empty" << endl;
+        return;
+    }
+
+    Node *temp = tail->next;
+    do
+    {
+        cout << temp->data << " ";
+        temp = temp->next;
+    } while (temp != tail->next);
+    cout << endl;
+}
+
+void deletion(Node* &tail, int pos)
+{
+    // Empty list
+    if (tail == NULL) {
+        cout << "List is empty" << endl;
+        return;
+    }
+
+    // Single node
+    if (tail == tail->next && pos == 1) {
+        delete tail;
+        tail = NULL;
+        return;
+    }
+
+    Node* prev = tail;
+    Node* curr = tail->next; // head
+    for (int i = 1; i < pos; i++) {
+        prev = curr;
+        curr = curr->next;
+    }
+
+    prev->next = curr->next;
+
+    // Deleting tail node
+    if (curr == tail) {
+        tail = prev;
+    }
+
+    delete curr;
+}
+
+int main()
+{
+    Node *tail = NULL;
+
+    insertdata(tail, 1, 5);    // List: 5
+    insertdata(tail, 2, 10);   // List: 5 10
+    insertdata(tail, 2, 7);    // List: 5 7 10
+
+    cout << "List after insertions: ";
+    printList(tail);           // Output: 5 7 10
+
+    deletion(tail, 2);         // Delete 7
+    cout << "After deleting position 2: ";
+    printList(tail);           // Output: 5 10
+
+    deletion(tail, 1);         // Delete 5
+    cout << "After deleting position 1: ";
+    printList(tail);           // Output: 10
+
+    deletion(tail, 1);         // Delete last node
+    cout << "After deleting last node: ";
+    printList(tail);           // Output: List is empty
+
+    return 0;
+}
+
