@@ -1,0 +1,80 @@
+void deletion(Node *&head, Node *&tail, int pos)
+{
+    if (pos < 1 || head == NULL)
+    {
+        return;
+    }
+
+    if (pos == 1)
+    {
+        Node *temp = head;
+        head = head->next;
+        if (head == NULL)
+        {
+            tail = NULL;
+        }
+
+        delete temp;
+        return;
+    }
+
+    Node *curr = head;
+
+    int count = 1;
+
+    while (curr != NULL && count != pos)
+    {
+        curr = curr->next;
+        count++;
+    }
+
+    if (curr == NULL)
+    {
+        return;
+    }
+
+    curr->prev->next = curr->next;
+    if (curr->next == NULL)
+    {
+        tail = curr->prev;
+    }
+    else
+    {
+        curr->next->prev = curr->prev;
+    }
+
+    delete curr;
+}
+
+int getlength(Node *head)
+{
+    int len = 0;
+    Node *temp = head;
+    while (temp != NULL)
+    {
+        len++;
+        temp = temp->next;
+    }
+    return len;
+}
+
+int main()
+{
+
+    Node *node1 = new Node(5);
+    Node *head = node1;
+    Node *tail = node1;
+
+    insertathead(head, 3);
+    insertattail(head, tail, 10);
+    insertatmiddle(head, 7, 3); // Insert at position 3
+
+    printLL(head); // Should print: 3-->5-->7-->10-->NULL
+
+    cout << "Length: " << getlength(head) << endl;
+
+    deletion(head, tail, 2); // Deletes value 5
+    printLL(head);           // Should print: 3-->7-->10-->NULL
+    cout << "Length: " << getlength(head) << endl;
+    return 0;
+}
