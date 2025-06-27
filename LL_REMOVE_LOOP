@@ -1,0 +1,22 @@
+
+void removeloop(Node *head)
+{
+    if (head == NULL)
+    {
+        return;
+    }
+
+    Node *start = detectnode(head);
+    if (start == NULL)
+    {
+        return;
+    }
+    Node *temp = start;
+
+    while (temp->next != start)
+    {
+        temp = temp->next;
+    }
+
+    temp->next = NULL;
+}
