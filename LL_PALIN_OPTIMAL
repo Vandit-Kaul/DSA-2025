@@ -1,0 +1,47 @@
+class Solution {
+  public:
+
+    Node* findmiddle(Node* head) {
+        Node* slow = head;
+        Node* fast = head;
+        while (fast != NULL && fast->next != NULL && fast->next->next != NULL) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
+
+    Node* reverse(Node* head) {
+        Node* prev = NULL;
+        Node* curr = head;
+        Node* next = NULL;
+        while (curr != NULL) {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+
+    bool isPalindrome(Node* head) {
+        if (head == NULL || head->next == NULL) return true;
+
+        Node* mid = findmiddle(head);
+        Node* secondHead = reverse(mid->next);
+        mid->next = NULL;
+
+        Node* firstHead = head;
+        Node* second = secondHead;
+
+        while (second != NULL) {
+            if (firstHead->data != second->data) {
+                return false;
+            }
+            firstHead = firstHead->next;
+            second = second->next;
+        }
+
+        return true;
+    }
+};
