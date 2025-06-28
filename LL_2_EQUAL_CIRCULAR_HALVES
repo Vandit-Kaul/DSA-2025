@@ -1,0 +1,28 @@
+void split(Node *&head)
+{
+
+    if (head == NULL || head->next == NULL)
+    {
+        return;
+    }
+    Node *middle = findmiddle(head);
+
+    Node *temp = head;
+
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    temp->next = head;
+
+    Node *head2 = middle->next;
+    middle->next = head;
+
+    Node *curr = head2;
+    while (curr->next != head)
+    {
+        curr = curr->next;
+    }
+
+    curr->next = head2;
+}
