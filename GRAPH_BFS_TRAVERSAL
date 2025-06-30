@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+void bfs(int start, vector<vector<int>> &adj, vector<bool> &visited)
+{
+    queue<int> q;
+    q.push(start);
+    visited[start] = true;
+    while (!q.empty())
+    {
+
+        int node = q.front();
+        cout << node << " ";
+        q.pop();
+        for (int neigbours : adj[node])
+        {
+            if (!visited[neigbours])
+            {
+                q.push(neigbours);
+                visited[neigbours] = true;
+            }
+        }
+    }
+}
+int main()
+{
+
+    int V, E;
+    cin >> V >> E;
+    vector<vector<int>> adj(V);
+    vector<bool> visited(V, false);
+    for (int i = 0; i < E; i++)
+    {
+        int u, v;
+        cin >> u >> v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    cout << "BFS traversal from the starting node 0 is:" << endl;
+
+    bfs(0, adj, visited);
+}
