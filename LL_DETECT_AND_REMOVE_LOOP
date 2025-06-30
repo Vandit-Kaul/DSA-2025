@@ -1,0 +1,44 @@
+Node *detectloop(Node *head)
+{
+    if (head == NULL || head->next == NULL)
+        return NULL;
+
+    Node *slow = head;
+    Node *fast = head;
+
+    while (fast != NULL && fast->next != NULL)
+    {
+        fast = fast->next->next;
+        slow = slow->next;
+
+        if (slow == fast)
+        {
+            // Loop detected
+            slow = head;
+            while (slow != fast)
+            {
+                slow = slow->next;
+                fast = fast->next;
+            }
+            return slow; // Start of the loop
+        }
+    }
+    return NULL; // No loop
+}
+
+Node *removeLoop(Node *head)
+{
+    Node *loop = detectloop(head);
+    if (loop == NULL)
+        return head;
+
+    // Find the node just before the loop starting point
+    Node *temp = loop;
+    while (temp->next != loop)
+    {
+        temp = temp->next;
+    }
+
+    temp->next = NULL; // Remove loop
+    return head;
+}
