@@ -1,0 +1,47 @@
+/*
+class Node {
+public:
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int val) {
+        data = val;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+Node* newNode(int val) {
+    return new Node(val);
+}
+*/
+
+class Solution {
+  public:
+  
+  int diameterFast(Node * root,int &height)
+  {
+      if(root==NULL)
+      {
+          height=0;
+          return 0;
+      }
+      
+      int lh=0,rh=0;
+      
+      int ld=diameterFast(root->left,lh);
+      int rd=diameterFast(root->right,rh);
+      
+      height=max(lh,rh) +1;
+      
+      int selfdiameter=lh+rh;
+      
+      return max(selfdiameter,max(ld,rd));
+  }
+    int diameter(Node* root) {
+        // Your code here
+      int height=0;
+      return  diameterFast(root,height);
+    }
+};
