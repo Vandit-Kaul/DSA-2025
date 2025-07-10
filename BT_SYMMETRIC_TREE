@@ -1,0 +1,47 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
+ * right(right) {}
+ * };
+ */
+class Solution {
+public:
+    bool solve(TreeNode* l, TreeNode* r) {
+        if (l == NULL &&
+            r == NULL) { // 3 edge cases to check the NULL cases 1.if both
+                         // NULL 2.if one NULL 3.if the second null
+            return true;
+        }
+
+        if (l == NULL && r != NULL) {
+            return false;
+        }
+
+        if (l != NULL && r == NULL) {
+            return false;
+        }
+
+        bool left = solve(l->left,
+                          r->right); // As we are checking inverted that is why
+                                     // we go left for one and right for another
+        bool right = solve(l->right,
+                           r->left); // As we are checking inverted that is why
+                                     // we go right for one and left for another
+        bool data = (l->val == r->val); // Check the data also
+
+        if (left && right && data) {
+             // If all 3 true then return true return else false
+                return true;
+        }
+        return false;
+    }
+    bool isSymmetric(TreeNode* root) {
+        return solve(root->left, root->right);
+    } // Pass the root's left and right as the arguments
+};
