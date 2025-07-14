@@ -1,0 +1,36 @@
+class Solution {
+public:
+    void solve(int node, vector<vector<int>> &adjlist, vector<bool>& visited) {
+        visited[node] = true;
+        for (auto neigbours : adjlist[node]) {
+            if (!visited[neigbours]) {
+                solve(neigbours, adjlist, visited);
+            }
+        }
+    }
+    int findCircleNum(vector<vector<int>>& isConnected) {
+
+        int V = isConnected.size();
+        vector<bool> visited(V, false);
+
+        vector<vector<int>> adjlist(V);
+
+        for (int i = 0; i < V; i++) {
+            for (int j = 0; j < V; j++) {
+                if (isConnected[i][j] == 1 && i != j) {
+                    adjlist[i].push_back(j);
+                    adjlist[j].push_back(i);
+                }
+            }
+        }
+
+        int count = 0;
+        for (int i = 0; i < V; i++) {
+            if (!visited[i]) {
+                count++;
+                solve(i, adjlist, visited);
+            }
+        }
+        return count;
+    }
+};
