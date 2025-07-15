@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool check(char letter) {
+        if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' ||
+            letter == 'u') {
+            return true;
+        }
+        return false;
+    }
+    bool isValid(string word) {
+        int size = word.length();
+
+        if (size < 3) {
+            return false;
+        }
+
+        int vowel_count = 0;
+        int consonent_count = 0;
+
+        for (int i = 0; i < size; i++) {
+            char ch = word[i];
+            if (!isalnum(ch)) {
+                return false;
+            }
+            if (isalpha(ch)) {
+                if (check(tolower(ch))) {
+                    vowel_count++;
+                } else {
+                    consonent_count++;
+                }
+            }
+        }
+        if (vowel_count == 0 || consonent_count == 0) {
+            return false;
+        }
+        return true;
+    }
+};
