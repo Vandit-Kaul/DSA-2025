@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool checkIfPangram(string sentence) {
+        bool alphas[26] = {false};
+
+        int size = sentence.size();
+        int i = 0;
+        if (size < 26) {
+            return false;
+        }
+
+        for (char c : sentence) {
+            alphas[c - 'a'] = true;
+        }
+
+        for (int i = 0; i < 26; i++) {
+            if (alphas[i] == false) {
+                return false;
+            }
+        }
+        return true;
+    }
+};
